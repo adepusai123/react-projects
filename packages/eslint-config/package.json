@@ -20,5 +20,12 @@
     "globals": "^16.3.0",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.35.0"
+  },
+  "dependencies": {
+    "@originjs/vite-plugin-federation": "^1.4.1",
+    "@tanstack/react-query": "^5.83.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "react": "^19.1.0",
+    "vite": "^7.0.4"
   }
 }

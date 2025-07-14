@@ -1,43 +1,52 @@
-# Turborepo starter
+# Ecom MFE Monorepo Setup
 
-This Turborepo starter is maintained by the Turborepo core team.
+This monorepo uses Turborepo, Vite, React, and Module Federation to build a scalable micro-frontend architecture.
 
-## Using this example
+## Folder Structure
+- `packages/core`: Shared resources (e.g., tanstack query, context)
+- `packages/products`: Federated module for product listing
+- `packages/application`: Host application for all modules
 
-Run the following command:
+## Step-by-Step Setup
 
-```sh
-npx create-turbo@latest
-```
+### 1. Initialize Turborepo
+- Run `npx create-turbo@latest .` in the `ecom-mfe` root.
+- Choose your preferred package manager (e.g., pnpm).
 
-## What's inside?
+### 2. Create Packages
+- Create `core`, `products`, and `application` folders under `packages`.
 
-This Turborepo includes the following packages/apps:
+### 3. Scaffold Each Module
+- Each module is a Vite React TypeScript app with its own `vite.config.ts`.
+- Install dependencies:
+  ```bash
+  pnpm install vite @vitejs/plugin-react @originjs/vite-plugin-federation @tanstack/react-query react --filter "./packages/*"
+  ```
 
-### Apps and Packages
+### 4. Configure Module Federation
+- `application` is the host and loads remotes from `products` and `core`.
+- `core` exposes shared resources.
+- `products` exposes product list component.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 5. Build and Run All Modules
+- Use Turborepo commands:
+  ```bash
+  pnpm run build    # Build all apps and packages
+  pnpm run dev      # Develop all apps and packages
+  pnpm run lint     # Lint all apps and packages
+  ```
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### 6. Add More Modules
+- Add new folders under `packages` and configure their own `vite.config.ts` for federation.
 
-### Utilities
+### 7. Useful Links
+- [Turborepo Docs](https://turborepo.com/docs)
+- [Vite Docs](https://vitejs.dev/)
+- [Module Federation Plugin](https://github.com/originjs/vite-plugin-federation)
 
-This Turborepo has some additional tools already setup for you:
+---
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
+**This README will be updated as you add more modules and features.**
 
 # With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
 turbo build
